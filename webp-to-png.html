@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+
+<title>WebP PNG 変換 無料・高画質・オンライン</title>
+
+<meta name="description" content="WebP画像をPNGに無料で変換できるツールです。高画質のまま簡単に変換できます。スマホ・PC対応。">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body { font-family:sans-serif; text-align:center; padding:20px;}
+#drop { border:2px dashed #999; padding:40px; margin:20px auto; max-width:300px;}
+img { max-width:200px; margin:10px;}
+.section { max-width:700px; margin:auto; text-align:left;}
+</style>
+</head>
+
+<body>
+
+<h1>WebP → PNG 変換</h1>
+
+<div id="drop">ここにWebP画像をドラッグ</div>
+<input type="file" id="upload" accept="image/webp" multiple><br>
+<button onclick="convert()">変換する</button>
+
+<div id="result"></div>
+
+<div class="section">
+<h2>WebPをPNGに変換</h2>
+<p>WebP画像をPNG形式に簡単に変換できます。</p>
+</div>
+
+<script>
+const drop = document.getElementById("drop");
+
+drop.addEventListener("dragover", e=>{e.preventDefault();});
+drop.addEventListener("drop", e=>{
+  e.preventDefault();
+  upload.files = e.dataTransfer.files;
+});
+
+function convert(){
+  const files = upload.files;
+  const result = document.getElementById("result");
+  result.innerHTML="";
+
+  Array.from(files).forEach(file=>{
+    const img=new Image();
+    const reader=new FileReader();
+
+    reader.onload=e=>img.src=e.target.result;
+
+    img.onload=()=>{
+      const canvas=document.createElement("canvas");
+      canvas.width=img.width;
+      canvas.height=img.height;
+
+      const ctx=canvas.getContext("2d");
+      ctx.drawImage(img,0,0);
+
+      const png=canvas.toDataURL("image/png");
+
+      const link=document.createElement("a");
+      link.href=png;
+      link.download=file.name.replace(".webp",".png");
+      link.innerText="ダウンロード";
+
+      const preview=document.createElement("img");
+      preview.src=png;
+
+      result.appendChild(preview);
+      result.appendChild(link);
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+
+</body>
+</html>

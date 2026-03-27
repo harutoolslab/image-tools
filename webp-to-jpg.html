@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+
+<title>WebP JPG 変換 無料・オンライン</title>
+
+<meta name="description" content="WebP画像をJPGに変換できる無料ツールです。簡単・高速・ブラウザ対応。">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+
+<body>
+
+<h1>WebP → JPG 変換</h1>
+
+<input type="file" id="upload" accept="image/webp" multiple><br>
+<button onclick="convert()">変換する</button>
+
+<div id="result"></div>
+
+<script>
+function convert(){
+  const files = upload.files;
+  const result = document.getElementById("result");
+  result.innerHTML="";
+
+  Array.from(files).forEach(file=>{
+    const img=new Image();
+    const reader=new FileReader();
+
+    reader.onload=e=>img.src=e.target.result;
+
+    img.onload=()=>{
+      const canvas=document.createElement("canvas");
+      canvas.width=img.width;
+      canvas.height=img.height;
+
+      const ctx=canvas.getContext("2d");
+
+      // 白背景（透過対策）
+      ctx.fillStyle="#fff";
+      ctx.fillRect(0,0,canvas.width,canvas.height);
+
+      ctx.drawImage(img,0,0);
+
+      const jpg=canvas.toDataURL("image/jpeg",0.9);
+
+      const link=document.createElement("a");
+      link.href=jpg;
+      link.download=file.name.replace(".webp",".jpg");
+      link.innerText="ダウンロード";
+
+      const preview=document.createElement("img");
+      preview.src=jpg;
+
+      result.appendChild(preview);
+      result.appendChild(link);
+    };
+
+    reader.readAsDataURL(file);
+  });
+}
+</script>
+
+</body>
+</html>
