@@ -3,79 +3,173 @@
 <head>
 <meta charset="UTF-8">
 
-<title>WebP PNG 変換 無料・高画質・オンライン</title>
-
-<meta name="description" content="WebP画像をPNGに無料で変換できるツールです。高画質のまま簡単に変換できます。スマホ・PC対応。">
+<title>WebPをPNGに変換｜無料オンラインツール</title>
+<meta name="description" content="WebP画像をPNGに変換できる無料ツール。透過画像にも対応し、高画質のまま変換できます。スマホ・PC対応。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body { font-family:sans-serif; text-align:center; padding:20px;}
-#drop { border:2px dashed #999; padding:40px; margin:20px auto; max-width:300px;}
-img { max-width:200px; margin:10px;}
-.section { max-width:700px; margin:auto; text-align:left;}
+body {
+  font-family: sans-serif;
+  text-align: center;
+  padding: 20px;
+  background: #fafafa;
+}
+
+h1 { margin-bottom: 10px; }
+
+#drop {
+  border: 2px dashed #999;
+  padding: 40px;
+  margin: 20px auto;
+  max-width: 320px;
+  background: #fff;
+}
+
+#drop:hover { background: #f5f5f5; }
+
+input, button {
+  margin: 10px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button { cursor: pointer; }
+
+.section {
+  max-width: 700px;
+  margin: 40px auto;
+  text-align: left;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.ad {
+  margin: 30px 0;
+  padding: 20px;
+  background: #eee;
+}
 </style>
 </head>
 
 <body>
 
-<h1>WebP → PNG 変換</h1>
+<h1>WebPをPNGに変換（無料・オンライン）</h1>
 
-<div id="drop">ここにWebP画像をドラッグ</div>
+<p>
+WebP画像をPNG形式に変換できます。<br>
+透過を保持したまま高画質で変換できます。
+</p>
+
+<div class="ad">広告</div>
+
+<div id="drop">WebP画像をドラッグ＆ドロップ</div>
+
 <input type="file" id="upload" accept="image/webp" multiple><br>
-<button onclick="convert()">変換する</button>
+
+<button onclick="run()">変換する</button>
 
 <div id="result"></div>
 
+<div class="ad">広告</div>
+
 <div class="section">
-<h2>WebPをPNGに変換</h2>
-<p>WebP画像をPNG形式に簡単に変換できます。</p>
+<h2>使い方</h2>
+<p>
+1. WebP画像を選択またはドラッグ<br>
+2. 変換ボタンを押す<br>
+3. PNGをダウンロード
+</p>
+</div>
+
+<div class="section">
+<h2>特徴</h2>
+<ul>
+<li>透過対応（アルファチャンネル保持）</li>
+<li>高画質PNG出力</li>
+<li>無料・インストール不要</li>
+<li>ブラウザで安全に処理</li>
+</ul>
+</div>
+
+<div class="section">
+<h2>関連ツール</h2>
+<a href="webp-to-jpg.html">WebPをJPGに変換する</a><br>
+<a href="image-to-webp.html">画像をWebPに変換する</a><br>
+<a href="png-to-jpg.html">PNGをJPGに変換する</a><br>
+<a href="jpg-to-png.html">JPGをPNGに変換する</a><br>
+<a href="index.html">トップページ</a>
 </div>
 
 <script>
-const drop = document.getElementById("drop");
+// ===== 共通処理 =====
 
-drop.addEventListener("dragover", e=>{e.preventDefault();});
-drop.addEventListener("drop", e=>{
-  e.preventDefault();
-  upload.files = e.dataTransfer.files;
+const drop = document.getElementById("drop");
+const upload = document.getElementById("upload");
+
+let files = [];
+
+upload.addEventListener("change", e => {
+  files = e.target.files;
 });
 
-function convert(){
-  const files = upload.files;
+drop.addEventListener("dragover", e => {
+  e.preventDefault();
+  drop.style.background = "#eee";
+});
+
+drop.addEventListener("dragleave", () => {
+  drop.style.background = "#fff";
+});
+
+drop.addEventListener("drop", e => {
+  e.preventDefault();
+  files = e.dataTransfer.files;
+  drop.style.background = "#fff";
+});
+
+function run(){
+  if(files.length === 0){
+    alert("ファイルを選択してください");
+    return;
+  }
+  process(files);
+}
+
+// ===== ツール処理 =====
+
+function process(files){
   const result = document.getElementById("result");
-  result.innerHTML="";
+  result.innerHTML = "変換中...";
 
-  Array.from(files).forEach(file=>{
-    const img=new Image();
-    const reader=new FileReader();
+  for(let file of files){
 
-    reader.onload=e=>img.src=e.target.result;
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
 
-    img.onload=()=>{
-      const canvas=document.createElement("canvas");
-      canvas.width=img.width;
-      canvas.height=img.height;
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
 
-      const ctx=canvas.getContext("2d");
-      ctx.drawImage(img,0,0);
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
 
-      const png=canvas.toDataURL("image/png");
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
 
-      const link=document.createElement("a");
-      link.href=png;
-      link.download=file.name.replace(".webp",".png");
-      link.innerText="ダウンロード";
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = file.name.replace(/\.webp/i, ".png");
+        a.textContent = a.download;
 
-      const preview=document.createElement("img");
-      preview.src=png;
+        result.appendChild(a);
+        result.appendChild(document.createElement("br"));
 
-      result.appendChild(preview);
-      result.appendChild(link);
+      }, "image/png");
     };
-
-    reader.readAsDataURL(file);
-  });
+  }
 }
 </script>
 
