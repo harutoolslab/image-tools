@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8">
 
-<title>画像 リサイズ 無料・サイズ変更・オンライン</title>
-
-<meta name="description" content="画像のサイズを簡単に変更できる無料ツールです。幅や高さを指定してリサイズ可能。スマホ・PC対応でインストール不要。">
+<title>画像リサイズ｜無料オンラインでサイズ変更</title>
+<meta name="description" content="画像（PNG・JPG）のサイズを変更できる無料ツール。幅・高さを指定して簡単にリサイズできます。スマホ・PC対応。">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -14,73 +13,117 @@ body {
   font-family: sans-serif;
   text-align: center;
   padding: 20px;
+  background: #fafafa;
 }
+
+h1 { margin-bottom: 10px; }
 
 #drop {
   border: 2px dashed #999;
   padding: 40px;
   margin: 20px auto;
-  max-width: 300px;
+  max-width: 320px;
+  background: #fff;
 }
+
+#drop:hover { background: #f5f5f5; }
 
 input, button {
   margin: 10px;
   padding: 10px;
+  font-size: 16px;
 }
 
-img {
-  max-width: 200px;
-  margin: 10px;
-}
+button { cursor: pointer; }
 
 .section {
   max-width: 700px;
-  margin: auto;
+  margin: 40px auto;
   text-align: left;
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.tool-box { margin: 20px 0; }
+
+.ad {
+  margin: 30px 0;
+  padding: 20px;
+  background: #eee;
 }
 </style>
 </head>
 
 <body>
 
-<h1>画像リサイズツール</h1>
+<h1>画像リサイズ（無料・オンライン）</h1>
 
-<p>画像のサイズを簡単に変更できます。</p>
+<p>
+画像の幅・高さを変更できます。<br>
+指定したサイズに簡単にリサイズできます。
+</p>
 
-<div id="drop">ここに画像をドラッグ</div>
+<div class="ad">広告</div>
 
-<input type="file" id="upload" accept="image/*" multiple><br>
+<div id="drop">画像をドラッグ＆ドロップ</div>
 
+<input type="file" id="upload" accept="image/png, image/jpeg" multiple><br>
+
+<div class="tool-box">
 <label>幅（px）</label><br>
 <input type="number" id="width" placeholder="例：800"><br>
 
 <label>高さ（px）</label><br>
 <input type="number" id="height" placeholder="例：600"><br>
+</div>
 
-<button onclick="resizeImage()">リサイズする</button>
+<button onclick="run()">リサイズする</button>
 
 <div id="result"></div>
 
+<div class="ad">広告</div>
+
 <div class="section">
-<h2>画像サイズ変更について</h2>
+<h2>使い方</h2>
 <p>
-このツールでは画像の幅や高さを自由に変更できます。
-Web用の画像サイズ調整やSNS投稿用に便利です。
+1. 画像を選択またはドラッグ<br>
+2. 幅・高さを入力<br>
+3. リサイズボタンを押す<br>
+4. ダウンロード
 </p>
 </div>
 
 <div class="section">
+<h2>特徴</h2>
+<ul>
+<li>完全無料</li>
+<li>インストール不要</li>
+<li>スマホ・PC対応</li>
+<li>ブラウザ上で処理（安全）</li>
+</ul>
+</div>
+
+<div class="section">
 <h2>関連ツール</h2>
-<a href="png-to-jpg.html">PNG→JPG</a><br>
-<a href="jpg-to-png.html">JPG→PNG</a><br>
-<a href="image-compress.html">画像圧縮</a><br>
-<a href="to-webp.html">WebP変換</a><br>
-<a href="index.html">トップ</a>
+<a href="image-compress.html">画像を圧縮する</a><br>
+<a href="png-to-jpg.html">PNGをJPGに変換する</a><br>
+<a href="jpg-to-png.html">JPGをPNGに変換する</a><br>
+<a href="heic-to-png.html">HEICをPNGに変換する</a><br>
+<a href="index.html">トップページ</a>
 </div>
 
 <script>
+// ===== 共通処理 =====
 
 const drop = document.getElementById("drop");
+const upload = document.getElementById("upload");
+
+let files = [];
+
+upload.addEventListener("change", e => {
+  files = e.target.files;
+});
 
 drop.addEventListener("dragover", e => {
   e.preventDefault();
@@ -88,64 +131,68 @@ drop.addEventListener("dragover", e => {
 });
 
 drop.addEventListener("dragleave", () => {
-  drop.style.background = "";
+  drop.style.background = "#fff";
 });
 
 drop.addEventListener("drop", e => {
   e.preventDefault();
-  document.getElementById("upload").files = e.dataTransfer.files;
-  drop.style.background = "";
+  files = e.dataTransfer.files;
+  drop.style.background = "#fff";
 });
 
-function resizeImage() {
-
-  const files = document.getElementById("upload").files;
-  const width = document.getElementById("width").value;
-  const height = document.getElementById("height").value;
-
-  if (files.length === 0) return alert("画像を選択してください");
-
-  const result = document.getElementById("result");
-  result.innerHTML = "";
-
-  Array.from(files).forEach(file => {
-
-    const img = new Image();
-    const reader = new FileReader();
-
-    reader.onload = e => img.src = e.target.result;
-
-    img.onload = () => {
-
-      const canvas = document.createElement("canvas");
-
-      canvas.width = width || img.width;
-      canvas.height = height || img.height;
-
-      const ctx = canvas.getContext("2d");
-      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-
-      const resized = canvas.toDataURL("image/jpeg", 0.9);
-
-      const preview = document.createElement("img");
-      preview.src = resized;
-
-      const link = document.createElement("a");
-      link.href = resized;
-      link.download = "resized.jpg";
-      link.innerText = "ダウンロード";
-
-      result.appendChild(preview);
-      result.appendChild(link);
-
-    };
-
-    reader.readAsDataURL(file);
-
-  });
-
+function run(){
+  if(files.length === 0){
+    alert("ファイルを選択してください");
+    return;
+  }
+  process(files);
 }
 
+// ===== ツール処理 =====
+
+function process(files){
+  const result = document.getElementById("result");
+  result.innerHTML = "リサイズ中...";
+
+  const widthInput = document.getElementById("width").value;
+  const heightInput = document.getElementById("height").value;
+
+  if(!widthInput || !heightInput){
+    alert("幅と高さを入力してください");
+    return;
+  }
+
+  const width = parseInt(widthInput);
+  const height = parseInt(heightInput);
+
+  for(let file of files){
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+
+    img.onload = () => {
+      const canvas = document.createElement("canvas");
+      canvas.width = width;
+      canvas.height = height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0, width, height);
+
+      canvas.toBlob(blob => {
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "resized.jpg";
+        a.textContent = a.download;
+
+        result.appendChild(a);
+        result.appendChild(document.createElement("br"));
+
+      }, "image/jpeg", 0.9);
+    };
+  }
+}
 </script>
 
 </body>
