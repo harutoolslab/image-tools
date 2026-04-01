@@ -3,152 +3,213 @@
 <head>
 <meta charset="UTF-8">
 
-<title>JPGをPNGに変換｜無料オンラインツール</title>
-<meta name="description" content="JPG画像をPNGに変換できる無料ツール。画質を保ったまま簡単にPNG形式へ変換できます。スマホ・PC対応。">
-
+<title>JPGをPNGに変換｜無料・高画質・オンライン一括変換「はるツール」</title>
+<meta name="description" content="JPG画像をPNG形式に一括変換できる無料ツールです。画質を保ったまま、ブラウザ上で安全に変換。インストール不要でスマホ・PCどちらでもすぐにお使いいただけます。">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root {
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --success: #28a745;
+  --bg-color: #f4f7f9;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-sub: #666666;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 body {
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0; padding: 0; line-height: 1.6;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+/* 広告枠 */
+.ad-slot {
+  margin: 20px auto; padding: 15px;
+  background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 8px;
+  color: #999; font-size: 12px; text-align: center; min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ad-label { display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase; }
+
+/* ヘッダー */
+header { text-align: center; margin: 40px 0 20px; }
+h1 { font-size: 1.8rem; color: #111; margin-bottom: 10px; }
+.tagline { color: var(--text-sub); font-size: 1rem; }
+
+/* ツールメインエリア */
+.main-card {
+  background: var(--card-bg);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   text-align: center;
-  padding: 20px;
-  background: #fafafa;
+  margin-bottom: 30px;
 }
 
-h1 { margin-bottom: 10px; }
+/* ドラッグ&ドロップエリア */
+#drop-area {
+  border: 3px dashed var(--primary);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 123, 255, 0.02);
+}
+#drop-area.active { background: rgba(0, 123, 255, 0.1); border-color: var(--primary-hover); }
 
-#drop {
-  border: 2px dashed #999;
-  padding: 40px;
-  margin: 20px auto;
-  max-width: 320px;
-  background: #fff;
+.btn-select {
+  background: var(--primary); color: white; border: none; padding: 12px 30px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px;
 }
 
-#drop:hover { background: #f5f5f5; }
-
-input, button {
-  margin: 10px;
-  padding: 10px;
-  font-size: 16px;
+.btn-run {
+  background: var(--success); color: white; border: none; padding: 15px 40px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 20px;
 }
 
-button { cursor: pointer; }
-
-.section {
-  max-width: 700px;
-  margin: 40px auto;
-  text-align: left;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+/* 結果エリア */
+#result-zone { margin-top: 30px; text-align: left; }
+.result-item {
+  background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid #eee;
+  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
 }
+.download-link { color: var(--primary); font-weight: bold; text-decoration: none; border: 1px solid var(--primary); padding: 4px 12px; border-radius: 4px; }
+.download-link:hover { background: var(--primary); color: white; }
 
-.tool-box { margin: 20px 0; }
+/* SEO解説セクション */
+.info-section { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 30px; text-align: left; }
+.info-section h2 { border-left: 6px solid var(--primary); padding-left: 15px; font-size: 1.5rem; margin: 30px 0 20px; }
+.info-section h3 { font-size: 1.2rem; color: #444; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.faq-q { font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px; }
 
-.ad {
-  margin: 30px 0;
-  padding: 20px;
-  background: #eee;
-}
+footer { margin-top: 50px; padding: 30px; color: #999; font-size: 0.8rem; text-align: center; }
 </style>
 </head>
-
 <body>
 
-<h1>JPGをPNGに変換（無料・オンライン）</h1>
+<div class="container">
+  <header>
+    <div style="font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-bottom: 5px;">無料オンラインツール集「はるツール」</div>
+    <h1>JPGをPNGに変換</h1>
+    <p class="tagline">JPG（JPEG）画像を、汎用性の高いPNG形式へ変換します。</p>
+  </header>
 
-<p>
-JPG画像をPNG形式に変換できます。<br>
-画質を保ったまま簡単に変換できます。
-</p>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<div class="ad">広告</div>
+  <main class="main-card">
+    <div id="drop-area">
+      <div style="font-size: 1.2rem; font-weight: bold;">JPG画像をドラッグ＆ドロップ</div>
+      <p style="color: var(--text-sub); margin: 10px 0;">または</p>
+      <button type="button" class="btn-select" onclick="document.getElementById('file-input').click()">ファイルを選択</button>
+      <input type="file" id="file-input" accept="image/jpeg" multiple style="display:none;">
+    </div>
 
-<div id="drop">JPG画像をドラッグ＆ドロップ</div>
+    <button class="btn-run" onclick="run()">PNGに変換する</button>
 
-<input type="file" id="upload" accept="image/jpeg" multiple><br>
+    <div id="result-zone"></div>
+  </main>
 
-<button onclick="run()">変換する</button>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<div id="result"></div>
+  <article class="info-section">
+    <h2>JPGをPNGに変換ツールとは？</h2>
+    <p>
+      「はるツール」のJPG-PNG変換ツールは、写真などでよく使われるJPG形式を、より高品質で透過情報なども扱えるPNG形式に変換するためのツールです。
+      複数のファイルをまとめて処理できる一括変換に対応しており、ブラウザだけで完結するため非常に高速かつ安全です。
+    </p>
 
-<div class="ad">広告</div>
+    <h3>このツールの特徴</h3>
+    <ul>
+      <li><strong>完全無料：</strong> 登録や制限なしで、何枚でも変換いただけます。</li>
+      <li><strong>高画質変換：</strong> 再圧縮による劣化を抑え、元の画質を維持したまま変換します。</li>
+      <li><strong>プライバシー保護：</strong> 画像はサーバーにアップロードされず、あなたのブラウザ内だけで処理されます。</li>
+    </ul>
 
-<div class="section">
-<h2>使い方</h2>
-<p>
-1. JPG画像を選択またはドラッグ<br>
-2. 変換ボタンを押す<br>
-3. PNGをダウンロード
-</p>
-</div>
+    <h2>使い方の手順</h2>
+    <ol>
+      <li>変換したいJPG画像をエリア内にドラッグ、またはボタンから選択します。</li>
+      <li>「PNGに変換する」ボタンをクリックします。</li>
+      <li>変換されたファイル名が表示されたら、右側のボタンから保存してください。</li>
+    </ol>
 
-<div class="section">
-<h2>特徴</h2>
-<ul>
-<li>完全無料</li>
-<li>インストール不要</li>
-<li>スマホ・PC対応</li>
-<li>ブラウザ上で処理（安全）</li>
-</ul>
-</div>
+    <h2>よくある質問（FAQ）</h2>
+    <div class="faq-item">
+      <span class="faq-q">Q. JPGをPNGに変換すると画質は良くなりますか？</span>
+      <p>A. PNGは可逆圧縮形式ですが、元のJPGがすでに圧縮されているため、変換によって元の画質以上に向上することはありません。ただし、今後の編集による劣化を防ぐことができます。</p>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q. 変換後にファイルサイズが大きくなったのですが？</span>
+      <p>A. PNGはJPGよりもデータ保持量が多いため、ファイルサイズが大きくなる傾向があります。容量を抑えたい場合は、当サイトの「画像圧縮ツール」を併用してください。</p>
+    </div>
 
-<div class="section">
-<h2>関連ツール</h2>
-<a href="png-to-jpg.html">PNGをJPGに変換する</a><br>
-<a href="image-compress.html">画像を圧縮する</a><br>
-<a href="image-resize.html">画像サイズを変更する</a><br>
-<a href="heic-to-png.html">HEICをPNGに変換する</a><br>
-<a href="index.html">トップページ</a>
+    <h3>関連ツール</h3>
+    <ul>
+      <li><a href="png-to-jpg.html">PNGをJPGに変換</a></li>
+      <li><a href="image-compress.html">画像を圧縮する</a></li>
+      <li><a href="image-to-webp.html">画像をWebPに変換</a></li>
+    </ul>
+  </article>
+
+  <footer>
+    &copy; 2026 はるツール | <a href="privacy.html" style="color:#999;">利用規約・プライバシーポリシー</a>
+  </footer>
 </div>
 
 <script>
-// ===== 共通処理 =====
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const resultZone = document.getElementById('result-zone');
 
-const drop = document.getElementById("drop");
-const upload = document.getElementById("upload");
+let selectedFiles = [];
 
-let files = [];
-
-upload.addEventListener("change", e => {
-  files = e.target.files;
+// ドラッグ&ドロップイベント
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, e => { e.preventDefault(); e.stopPropagation(); }, false);
+});
+['dragenter', 'dragover'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.add('active'), false);
+});
+['dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.remove('active'), false);
 });
 
-drop.addEventListener("dragover", e => {
-  e.preventDefault();
-  drop.style.background = "#eee";
+dropArea.addEventListener('drop', e => {
+  selectedFiles = e.dataTransfer.files;
+  showStatus();
+}, false);
+
+fileInput.addEventListener('change', function() {
+  selectedFiles = this.files;
+  showStatus();
 });
 
-drop.addEventListener("dragleave", () => {
-  drop.style.background = "#fff";
-});
-
-drop.addEventListener("drop", e => {
-  e.preventDefault();
-  files = e.dataTransfer.files;
-  drop.style.background = "#fff";
-});
-
-function run(){
-  if(files.length === 0){
-    alert("ファイルを選択してください");
-    return;
+function showStatus() {
+  if (selectedFiles.length > 0) {
+    resultZone.innerHTML = `<p style="text-align:center; color:var(--primary); font-weight:bold;">${selectedFiles.length} 個のJPGファイルが準備できました。</p>`;
   }
-  process(files);
 }
 
-// ===== ツール処理 =====
+function run() {
+  if (selectedFiles.length === 0) return alert("画像を選択してください");
 
-function process(files){
-  const result = document.getElementById("result");
-  result.innerHTML = "変換中...";
+  resultZone.innerHTML = "<p style='text-align:center;'>変換中...</p>";
 
-  for(let file of files){
-
+  Array.from(selectedFiles).forEach(file => {
     const img = new Image();
-    img.src = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
+    img.src = url;
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
@@ -159,19 +220,30 @@ function process(files){
       ctx.drawImage(img, 0, 0);
 
       canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
+        const downloadUrl = URL.createObjectURL(blob);
+        const fileName = file.name.replace(/\.jpg|\.jpeg/i, "") + ".png";
+        
+        const item = document.createElement("div");
+        item.className = "result-item";
+        
+        const nameLabel = document.createElement("span");
+        nameLabel.style.fontSize = "0.9rem";
+        nameLabel.textContent = fileName;
+        
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = fileName;
+        link.textContent = "保存";
+        link.className = "download-link";
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = file.name.replace(/\.jpg|\.jpeg/i, ".png");
-        a.textContent = a.download;
-
-        result.appendChild(a);
-        result.appendChild(document.createElement("br"));
-
+        item.appendChild(nameLabel);
+        item.appendChild(link);
+        resultZone.appendChild(item);
+        
+        URL.revokeObjectURL(url);
       }, "image/png");
     };
-  }
+  });
 }
 </script>
 
