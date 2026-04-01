@@ -3,159 +3,233 @@
 <head>
 <meta charset="UTF-8">
 
-<title>画像をWebPに変換｜無料オンラインツール</title>
-<meta name="description" content="画像（PNG・JPG）をWebPに変換できる無料ツール。ファイルサイズを軽くしながら高画質を保てます。スマホ・PC対応。">
-
+<!-- ★SEO設定：はるツール WebP変換用 -->
+<title>画像をWebPに変換｜無料・高画質・ファイルサイズ軽量化「はるツール」</title>
+<meta name="description" content="PNGやJPG画像を、次世代画像形式「WebP（ウェッピー）」に一括変換できる無料ツールです。画質を保ったままファイルサイズを軽量化し、サイト高速化に貢献します。ブラウザ内処理で安全。">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root {
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --success: #28a745;
+  --bg-color: #f4f7f9;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-sub: #666666;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 body {
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0; padding: 0; line-height: 1.6;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+/* 広告枠 */
+.ad-slot {
+  margin: 20px auto; padding: 15px;
+  background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 8px;
+  color: #999; font-size: 12px; text-align: center; min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ad-label { display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase; }
+
+/* ヘッダー */
+header { text-align: center; margin: 40px 0 20px; }
+h1 { font-size: 1.8rem; color: #111; margin-bottom: 10px; }
+.tagline { color: var(--text-sub); font-size: 1rem; }
+
+/* ツールメインエリア */
+.main-card {
+  background: var(--card-bg);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   text-align: center;
-  padding: 20px;
-  background: #fafafa;
+  margin-bottom: 30px;
 }
 
-#drop {
-  border: 2px dashed #999;
-  padding: 40px;
-  margin: 20px auto;
-  max-width: 320px;
-  background: #fff;
+/* ドラッグ&ドロップエリア */
+#drop-area {
+  border: 3px dashed var(--primary);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 123, 255, 0.02);
+}
+#drop-area.active { background: rgba(0, 123, 255, 0.1); border-color: var(--primary-hover); }
+
+.btn-select {
+  background: var(--primary); color: white; border: none; padding: 12px 30px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px;
 }
 
-#drop:hover { background: #f5f5f5; }
+/* 設定エリア */
+.config-panel { margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 12px; }
+.config-row { margin-bottom: 10px; }
+input[type="range"] { width: 80%; max-width: 300px; vertical-align: middle; }
 
-input, button {
-  margin: 10px;
-  padding: 10px;
-  font-size: 16px;
+.btn-run {
+  background: var(--success); color: white; border: none; padding: 15px 40px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px;
 }
 
-.section {
-  max-width: 700px;
-  margin: 40px auto;
-  text-align: left;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+/* 結果エリア */
+#result-zone { margin-top: 30px; text-align: left; }
+.result-item {
+  background: white; padding: 12px 18px; border-radius: 8px; border: 1px solid #eee;
+  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
 }
+.download-link { color: var(--primary); font-weight: bold; text-decoration: none; border: 1px solid var(--primary); padding: 4px 12px; border-radius: 4px; }
+.download-link:hover { background: var(--primary); color: white; }
 
-.ad {
-  margin: 30px 0;
-  padding: 20px;
-  background: #eee;
-}
+/* SEO解説セクション */
+.info-section { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 30px; text-align: left; }
+.info-section h2 { border-left: 6px solid var(--primary); padding-left: 15px; font-size: 1.5rem; margin: 30px 0 20px; }
+.info-section h3 { font-size: 1.2rem; color: #444; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.faq-q { font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px; }
+
+footer { margin-top: 50px; padding: 30px; color: #999; font-size: 0.8rem; text-align: center; }
 </style>
 </head>
-
 <body>
 
-<h1>画像をWebPに変換（無料・オンライン）</h1>
+<div class="container">
+  <header>
+    <div style="font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-bottom: 5px;">無料オンラインツール集「はるツール」</div>
+    <h1>画像をWebPに変換</h1>
+    <p class="tagline">PNGやJPGを、軽量な次世代画像形式WebPに変換します。</p>
+  </header>
 
-<p>
-PNG・JPG画像をWebP形式に変換できます。<br>
-軽量で高画質なWebPに簡単に変換できます。
-</p>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<div class="ad">広告</div>
+  <main class="main-card">
+    <div id="drop-area">
+      <div style="font-size: 1.2rem; font-weight: bold;">画像をドラッグ＆ドロップ</div>
+      <p style="color: var(--text-sub); margin: 10px 0;">または</p>
+      <button type="button" class="btn-select" onclick="document.getElementById('file-input').click()">ファイルを選択</button>
+      <input type="file" id="file-input" accept="image/png, image/jpeg" multiple style="display:none;">
+    </div>
 
-<div id="drop">画像をドラッグ＆ドロップ</div>
+    <div class="config-panel">
+      <div class="config-row">
+        <label style="font-weight: bold;">画質（軽さ調整）: <span id="qval" style="color:var(--primary);">0.8</span></label><br>
+        <input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
+      </div>
+      <button class="btn-run" onclick="run()">WebPに変換する</button>
+    </div>
 
-<input type="file" id="upload" accept="image/png, image/jpeg" multiple><br>
+    <div id="result-zone"></div>
+  </main>
 
-<div class="tool-box">
-<label>画質（軽さ調整）</label><br>
-<input type="range" id="quality" min="0.1" max="1" step="0.1" value="0.8">
-<p id="qval">0.8</p>
-</div>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<button onclick="run()">変換する</button>
+  <article class="info-section">
+    <h2>WebP変換ツールとは？</h2>
+    <p>
+      「はるツール」のWebP変換ツールは、一般的なPNGやJPG形式の画像を、Googleが開発した高圧縮な画像形式「WebP（ウェッピー）」に変換するツールです。
+      WebPを採用することで、画質をほとんど損なうことなくファイルサイズを大幅に軽量化でき、ウェブサイトの読み込み速度向上（SEO対策）に直結します。
+    </p>
 
-<div id="result"></div>
+    <h3>このツールの特徴</h3>
+    <ul>
+      <li><strong>一括変換：</strong> 複数の画像をまとめてWebP形式へ変換可能です。</li>
+      <li><strong>画質調整：</strong> スライダーを使って、ファイルサイズと画質のバランスを自由に調整できます。</li>
+      <li><strong>安全・高速：</strong> 画像データはサーバーへ送信されず、すべてお使いのデバイス上で変換処理が行われます。</li>
+    </ul>
 
-<div class="ad">広告</div>
+    <h2>使い方の手順</h2>
+    <ol>
+      <li>WebPに変換したい画像をエリア内にドラッグ、または選択します。</li>
+      <li>「画質」スライダーで圧縮率を決定します（通常は0.8前後が最適です）。</li>
+      <li>「WebPに変換する」ボタンをクリックします。</li>
+      <li>生成されたファイル名をクリックして、WebP画像をダウンロードします。</li>
+    </ol>
 
-<div class="section">
-<h2>使い方</h2>
-<p>
-1. 画像を選択またはドラッグ<br>
-2. 画質を調整<br>
-3. 変換ボタンを押す<br>
-4. ダウンロード
-</p>
-</div>
+    <h2>よくある質問（FAQ）</h2>
+    <div class="faq-item">
+      <span class="faq-q">Q. WebP形式にするメリットは何ですか？</span>
+      <p>A. JPGやPNGに比べてファイルサイズが非常に小さくなるため、サイトの表示速度が速くなり、SEO評価やユーザー体験の向上につながります。</p>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q. どのブラウザでも表示されますか？</span>
+      <p>A. 現在、Chrome, Safari, Edge, Firefoxなど主要なモダンブラウザはすべてWebPに対応しています。</p>
+    </div>
 
-<div class="section">
-<h2>特徴</h2>
-<ul>
-<li>WebPで軽量化</li>
-<li>画質調整可能</li>
-<li>無料・インストール不要</li>
-<li>ブラウザで安全に処理</li>
-</ul>
-</div>
+    <h3>関連ツール</h3>
+    <ul>
+      <li><a href="image-compress.html">画像を圧縮する</a></li>
+      <li><a href="image-resize.html">画像リサイズ</a></li>
+      <li><a href="png-to-jpg.html">PNGをJPGに変換</a></li>
+    </ul>
+  </article>
 
-<div class="section">
-<h2>関連ツール</h2>
-<a href="png-to-jpg.html">PNGをJPGに変換する</a><br>
-<a href="jpg-to-png.html">JPGをPNGに変換する</a><br>
-<a href="image-compress.html">画像を圧縮する</a><br>
-<a href="index.html">トップページ</a>
+  <footer>
+    &copy; 2026 はるツール | <a href="privacy.html" style="color:#999;">利用規約・プライバシーポリシー</a>
+  </footer>
 </div>
 
 <script>
-// ===== 共通処理 =====
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const qualityInput = document.getElementById('quality');
+const qvalDisp = document.getElementById('qval');
+const resultZone = document.getElementById('result-zone');
 
-const drop = document.getElementById("drop");
-const upload = document.getElementById("upload");
+let selectedFiles = [];
 
-let files = [];
-
-upload.addEventListener("change", e => {
-  files = e.target.files;
+qualityInput.addEventListener('input', () => {
+  qvalDisp.textContent = qualityInput.value;
 });
 
-drop.addEventListener("dragover", e => {
-  e.preventDefault();
-  drop.style.background = "#eee";
+// イベント防止
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, e => { e.preventDefault(); e.stopPropagation(); }, false);
 });
 
-drop.addEventListener("dragleave", () => {
-  drop.style.background = "#fff";
+['dragenter', 'dragover'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.add('active'), false);
+});
+['dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.remove('active'), false);
 });
 
-drop.addEventListener("drop", e => {
-  e.preventDefault();
-  files = e.dataTransfer.files;
-  drop.style.background = "#fff";
+dropArea.addEventListener('drop', e => {
+  selectedFiles = e.dataTransfer.files;
+  showStatus();
+}, false);
+
+fileInput.addEventListener('change', function() {
+  selectedFiles = this.files;
+  showStatus();
 });
 
-function run(){
-  if(files.length === 0){
-    alert("ファイルを選択してください");
-    return;
+function showStatus() {
+  if (selectedFiles.length > 0) {
+    resultZone.innerHTML = `<p style="text-align:center; color:var(--primary); font-weight:bold;">${selectedFiles.length} 個のファイルが準備できました。</p>`;
   }
-  process(files);
 }
 
-// ===== ツール処理 =====
+function run() {
+  if (selectedFiles.length === 0) return alert("画像を選択してください");
 
-const quality = document.getElementById("quality");
-const qval = document.getElementById("qval");
+  resultZone.innerHTML = "<p style='text-align:center;'>変換中...</p>";
 
-quality.addEventListener("input", () => {
-  qval.textContent = quality.value;
-});
-
-function process(files){
-  const result = document.getElementById("result");
-  result.innerHTML = "変換中...";
-
-  for(let file of files){
-
+  Array.from(selectedFiles).forEach(file => {
     const img = new Image();
-    img.src = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
+    img.src = url;
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
@@ -166,19 +240,30 @@ function process(files){
       ctx.drawImage(img, 0, 0);
 
       canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
+        const downloadUrl = URL.createObjectURL(blob);
+        const fileName = file.name.replace(/\.(png|jpg|jpeg)$/i, "") + ".webp";
+        
+        const item = document.createElement("div");
+        item.className = "result-item";
+        
+        const nameLabel = document.createElement("span");
+        nameLabel.style.fontSize = "0.9rem";
+        nameLabel.textContent = fileName;
+        
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = fileName;
+        link.textContent = "保存";
+        link.className = "download-link";
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = file.name.replace(/\.(png|jpg|jpeg)/i, ".webp");
-        a.textContent = a.download;
-
-        result.appendChild(a);
-        result.appendChild(document.createElement("br"));
-
-      }, "image/webp", parseFloat(quality.value));
+        item.appendChild(nameLabel);
+        item.appendChild(link);
+        resultZone.appendChild(item);
+        
+        URL.revokeObjectURL(url);
+      }, "image/webp", parseFloat(qualityInput.value));
     };
-  }
+  });
 }
 </script>
 
