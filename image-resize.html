@@ -3,172 +3,241 @@
 <head>
 <meta charset="UTF-8">
 
-<title>画像リサイズ｜無料オンラインでサイズ変更</title>
-<meta name="description" content="画像（PNG・JPG）のサイズを変更できる無料ツール。幅・高さを指定して簡単にリサイズできます。スマホ・PC対応。">
-
+<!-- ★SEO設定：はるツール 画像リサイズ用 -->
+<title>画像リサイズ｜無料オンラインでサイズ変更・一括処理「はるツール」</title>
+<meta name="description" content="画像の幅・高さを指定して簡単にサイズ変更できる無料ツールです。PNG・JPGに対応。インストール不要でブラウザ上で安全にリサイズ。スマホ・PCどちらでも利用可能です。">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+:root {
+  --primary: #007bff;
+  --primary-hover: #0056b3;
+  --success: #28a745;
+  --bg-color: #f4f7f9;
+  --card-bg: #ffffff;
+  --text-main: #333333;
+  --text-sub: #666666;
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(0,0,0,0.08);
+}
+
 body {
-  font-family: sans-serif;
+  font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  margin: 0; padding: 0; line-height: 1.6;
+}
+
+.container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+
+/* 広告枠 */
+.ad-slot {
+  margin: 20px auto; padding: 15px;
+  background-color: #f0f0f0; border: 1px solid #ddd; border-radius: 8px;
+  color: #999; font-size: 12px; text-align: center; min-height: 90px;
+  display: flex; align-items: center; justify-content: center;
+}
+.ad-label { display: block; margin-bottom: 5px; font-size: 10px; text-transform: uppercase; }
+
+/* ヘッダー */
+header { text-align: center; margin: 40px 0 20px; }
+h1 { font-size: 1.8rem; color: #111; margin-bottom: 10px; }
+.tagline { color: var(--text-sub); font-size: 1rem; }
+
+/* ツールメインエリア */
+.main-card {
+  background: var(--card-bg);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
   text-align: center;
-  padding: 20px;
-  background: #fafafa;
+  margin-bottom: 30px;
 }
 
-h1 { margin-bottom: 10px; }
+/* ドラッグ&ドロップエリア */
+#drop-area {
+  border: 3px dashed var(--primary);
+  padding: 40px 20px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background: rgba(0, 123, 255, 0.02);
+}
+#drop-area.active { background: rgba(0, 123, 255, 0.1); border-color: var(--primary-hover); }
 
-#drop {
-  border: 2px dashed #999;
-  padding: 40px;
-  margin: 20px auto;
-  max-width: 320px;
-  background: #fff;
+.btn-select {
+  background: var(--primary); color: white; border: none; padding: 12px 30px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 15px;
 }
 
-#drop:hover { background: #f5f5f5; }
-
-input, button {
-  margin: 10px;
-  padding: 10px;
-  font-size: 16px;
+/* 設定エリア */
+.config-panel { margin: 20px 0; padding: 20px; background: #f8f9fa; border-radius: 12px; }
+.input-group { margin: 10px; display: inline-block; text-align: left; }
+.input-group label { display: block; font-size: 0.85rem; font-weight: bold; margin-bottom: 5px; color: #555; }
+input[type="number"] {
+  padding: 10px; border: 1px solid #ddd; border-radius: 8px; width: 120px; font-size: 1rem;
 }
 
-button { cursor: pointer; }
-
-.section {
-  max-width: 700px;
-  margin: 40px auto;
-  text-align: left;
-  background: #fff;
-  padding: 20px;
-  border-radius: 8px;
+.btn-run {
+  background: var(--success); color: white; border: none; padding: 15px 40px;
+  border-radius: 50px; font-weight: bold; cursor: pointer; font-size: 1.1rem; margin-top: 10px;
 }
 
-.tool-box { margin: 20px 0; }
-
-.ad {
-  margin: 30px 0;
-  padding: 20px;
-  background: #eee;
+/* 結果エリア */
+#result-zone { margin-top: 30px; text-align: left; }
+.result-item {
+  background: white; padding: 10px 15px; border-radius: 8px; border: 1px solid #eee;
+  margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;
 }
+.download-link { color: var(--primary); font-weight: bold; text-decoration: none; }
+
+/* SEO解説セクション */
+.info-section { background: var(--card-bg); padding: 40px; border-radius: var(--radius); box-shadow: var(--shadow); margin-top: 30px; text-align: left; }
+.info-section h2 { border-left: 6px solid var(--primary); padding-left: 15px; font-size: 1.5rem; margin: 30px 0 20px; }
+.info-section h3 { font-size: 1.2rem; color: #444; margin-top: 25px; border-bottom: 1px solid #eee; padding-bottom: 5px; }
+.faq-item { margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 15px; }
+.faq-q { font-weight: bold; color: var(--primary); display: block; margin-bottom: 5px; }
+
+footer { margin-top: 50px; padding: 30px; color: #999; font-size: 0.8rem; text-align: center; }
 </style>
 </head>
-
 <body>
 
-<h1>画像リサイズ（無料・オンライン）</h1>
+<div class="container">
+  <header>
+    <div style="font-size: 0.9rem; color: var(--primary); font-weight: bold; margin-bottom: 5px;">無料オンラインツール集「はるツール」</div>
+    <h1>画像リサイズ</h1>
+    <p class="tagline">画像の幅（px）と高さ（px）を指定して、瞬時にサイズを変更します。</p>
+  </header>
 
-<p>
-画像の幅・高さを変更できます。<br>
-指定したサイズに簡単にリサイズできます。
-</p>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<div class="ad">広告</div>
+  <main class="main-card">
+    <div id="drop-area">
+      <div style="font-size: 1.2rem; font-weight: bold;">画像をドラッグ＆ドロップ</div>
+      <p style="color: var(--text-sub); margin: 10px 0;">または</p>
+      <button type="button" class="btn-select" onclick="document.getElementById('file-input').click()">ファイルを選択</button>
+      <input type="file" id="file-input" accept="image/png, image/jpeg" multiple style="display:none;">
+    </div>
 
-<div id="drop">画像をドラッグ＆ドロップ</div>
+    <div class="config-panel">
+      <div class="input-group">
+        <label>幅 (px)</label>
+        <input type="number" id="width" placeholder="例：800">
+      </div>
+      <div class="input-group">
+        <label>高さ (px)</label>
+        <input type="number" id="height" placeholder="例：600">
+      </div>
+      <br>
+      <button class="btn-run" onclick="run()">リサイズを実行する</button>
+    </div>
 
-<input type="file" id="upload" accept="image/png, image/jpeg" multiple><br>
+    <div id="result-zone"></div>
+  </main>
 
-<div class="tool-box">
-<label>幅（px）</label><br>
-<input type="number" id="width" placeholder="例：800"><br>
+  <div class="ad-slot">
+    <div><span class="ad-label">Advertisement</span>ここに広告タグ</div>
+  </div>
 
-<label>高さ（px）</label><br>
-<input type="number" id="height" placeholder="例：600"><br>
-</div>
+  <article class="info-section">
+    <h2>画像リサイズツールとは？</h2>
+    <p>
+      「はるツール」の画像リサイズツールは、お手持ちの画像を指定した解像度（ピクセル）に変換するための無料ツールです。
+      ブログのアイキャッチ画像のサイズ統一や、SNSの投稿規定に合わせたサイズ変更などに非常に便利です。
+    </p>
 
-<button onclick="run()">リサイズする</button>
+    <h3>このツールの特徴</h3>
+    <ul>
+      <li><strong>インストール不要：</strong> ブラウザだけで完結するため、スマホからでもすぐに使えます。</li>
+      <li><strong>一括処理：</strong> 複数の画像を選択して、同じサイズに一気に変換できます。</li>
+      <li><strong>プライバシー保護：</strong> 画像はサーバーに送信されず、すべてブラウザ内で処理されるため安心です。</li>
+    </ul>
 
-<div id="result"></div>
+    <h2>使い方の手順</h2>
+    <ol>
+      <li>サイズを変更したい画像をエリア内にドラッグ、または選択します。</li>
+      <li>変更後の「幅」と「高さ」をピクセル単位で入力します。</li>
+      <li>「リサイズを実行する」ボタンをクリックします。</li>
+      <li>変換された画像の下にあるファイル名をクリックして保存します。</li>
+    </ol>
 
-<div class="ad">広告</div>
+    <h2>よくある質問（FAQ）</h2>
+    <div class="faq-item">
+      <span class="faq-q">Q. リサイズすると画質は落ちますか？</span>
+      <p>A. 画像を拡大する場合は画質が粗くなることがありますが、縮小する場合は高品質なリサイズ処理（キャンバス描画）を行っているため、劣化は最小限に抑えられます。</p>
+    </div>
+    <div class="faq-item">
+      <span class="faq-q">Q. 透過PNGは維持されますか？</span>
+      <p>A. 本ツールはJPEG形式での出力を基本としているため、透明部分は白または黒に変換される場合があります。透過を維持したい場合は、専用の背景透過ツールをご利用ください。</p>
+    </div>
 
-<div class="section">
-<h2>使い方</h2>
-<p>
-1. 画像を選択またはドラッグ<br>
-2. 幅・高さを入力<br>
-3. リサイズボタンを押す<br>
-4. ダウンロード
-</p>
-</div>
+    <h3>関連ツール</h3>
+    <ul>
+      <li><a href="image-compress.html">画像を圧縮する</a></li>
+      <li><a href="png-to-jpg.html">PNGをJPGに変換</a></li>
+      <li><a href="heic-to-png.html">HEICをPNGに変換</a></li>
+    </ul>
+  </article>
 
-<div class="section">
-<h2>特徴</h2>
-<ul>
-<li>完全無料</li>
-<li>インストール不要</li>
-<li>スマホ・PC対応</li>
-<li>ブラウザ上で処理（安全）</li>
-</ul>
-</div>
-
-<div class="section">
-<h2>関連ツール</h2>
-<a href="image-compress.html">画像を圧縮する</a><br>
-<a href="png-to-jpg.html">PNGをJPGに変換する</a><br>
-<a href="jpg-to-png.html">JPGをPNGに変換する</a><br>
-<a href="heic-to-png.html">HEICをPNGに変換する</a><br>
-<a href="index.html">トップページ</a>
+  <footer>
+    &copy; 2026 はるツール | <a href="privacy.html" style="color:#999;">利用規約・プライバシーポリシー</a>
+  </footer>
 </div>
 
 <script>
-// ===== 共通処理 =====
+const dropArea = document.getElementById('drop-area');
+const fileInput = document.getElementById('file-input');
+const resultZone = document.getElementById('result-zone');
 
-const drop = document.getElementById("drop");
-const upload = document.getElementById("upload");
+let selectedFiles = [];
 
-let files = [];
-
-upload.addEventListener("change", e => {
-  files = e.target.files;
+// イベント防止
+['dragenter', 'dragover', 'dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, e => { e.preventDefault(); e.stopPropagation(); }, false);
 });
 
-drop.addEventListener("dragover", e => {
-  e.preventDefault();
-  drop.style.background = "#eee";
+['dragenter', 'dragover'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.add('active'), false);
+});
+['dragleave', 'drop'].forEach(name => {
+  dropArea.addEventListener(name, () => dropArea.classList.remove('active'), false);
 });
 
-drop.addEventListener("dragleave", () => {
-  drop.style.background = "#fff";
+dropArea.addEventListener('drop', e => {
+  selectedFiles = e.dataTransfer.files;
+  updateStatus();
+}, false);
+
+fileInput.addEventListener('change', function() {
+  selectedFiles = this.files;
+  updateStatus();
 });
 
-drop.addEventListener("drop", e => {
-  e.preventDefault();
-  files = e.dataTransfer.files;
-  drop.style.background = "#fff";
-});
-
-function run(){
-  if(files.length === 0){
-    alert("ファイルを選択してください");
-    return;
+function updateStatus() {
+  if (selectedFiles.length > 0) {
+    resultZone.innerHTML = `<p style="text-align:center; color:var(--primary); font-weight:bold;">${selectedFiles.length} 個のファイルが選択されています。サイズを入力して実行してください。</p>`;
   }
-  process(files);
 }
 
-// ===== ツール処理 =====
-
-function process(files){
-  const result = document.getElementById("result");
-  result.innerHTML = "リサイズ中...";
-
+function run() {
   const widthInput = document.getElementById("width").value;
   const heightInput = document.getElementById("height").value;
 
-  if(!widthInput || !heightInput){
-    alert("幅と高さを入力してください");
-    return;
-  }
+  if (selectedFiles.length === 0) return alert("ファイルを選択してください");
+  if (!widthInput || !heightInput) return alert("幅と高さを入力してください");
 
   const width = parseInt(widthInput);
   const height = parseInt(heightInput);
 
-  for(let file of files){
+  resultZone.innerHTML = "<p style='text-align:center;'>リサイズ中...</p>";
 
+  Array.from(selectedFiles).forEach(file => {
     const img = new Image();
-    img.src = URL.createObjectURL(file);
+    const url = URL.createObjectURL(file);
+    img.src = url;
 
     img.onload = () => {
       const canvas = document.createElement("canvas");
@@ -179,19 +248,29 @@ function process(files){
       ctx.drawImage(img, 0, 0, width, height);
 
       canvas.toBlob(blob => {
-        const url = URL.createObjectURL(blob);
+        const downloadUrl = URL.createObjectURL(blob);
+        
+        const item = document.createElement("div");
+        item.className = "result-item";
+        
+        const nameLabel = document.createElement("span");
+        nameLabel.textContent = file.name + " → リサイズ完了";
+        
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "resized_" + file.name;
+        link.textContent = "保存する";
+        link.className = "download-link";
 
-        const a = document.createElement("a");
-        a.href = url;
-        a.download = "resized.jpg";
-        a.textContent = a.download;
-
-        result.appendChild(a);
-        result.appendChild(document.createElement("br"));
-
+        item.appendChild(nameLabel);
+        item.appendChild(link);
+        resultZone.appendChild(item);
+        
+        // メモリ解放
+        URL.revokeObjectURL(url);
       }, "image/jpeg", 0.9);
     };
-  }
+  });
 }
 </script>
 
